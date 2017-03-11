@@ -48,19 +48,16 @@ public class OptimisationEngine {
         this.population.createRandomPopulation();
 
         MoveSequence g;
-        int totalGenomes = 0;
+        int totalSequences = 0;
 
         while ((g = population.getNextSequenceToEvaluate()) != null) {
             SingleTask task = new SingleTask(g, getGameCopy());
             taskExecutor.addTask(task);
 
-            totalGenomes++;
-            //print(".");
+            totalSequences++;
         }
 
-        //print("\n");
-
-        while (totalGenomes-- > 0) {
+        while (totalSequences-- > 0) {
             SimpleScoreResult result = taskExecutor.getResult();
             population.setEvaluationResultForId(result.getSequenceId(), result.getScore());
         }
@@ -74,10 +71,6 @@ public class OptimisationEngine {
             tiles[i] = new Tile(this.gameConfiguration[i].getValue());
 
         return new Game2048(tiles);
-    }
-
-    public MoveSequencePopulation getPopulation() {
-        return population;
     }
 
 

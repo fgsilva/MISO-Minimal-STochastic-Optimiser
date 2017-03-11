@@ -1,8 +1,12 @@
 package game;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 /**
  * Created by fernando on 09-03-2017.
@@ -13,6 +17,8 @@ public class Game2048 {
     boolean myWin = false;
     boolean myLose = false;
     int myScore = 0;
+
+
 
 
     //start a game from a given configuration

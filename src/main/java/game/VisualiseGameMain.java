@@ -6,15 +6,13 @@ import stochasticOptimiser.OptimisationEngine;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Random;
 
 /**
  * Created by fernando on 09-03-2017.
  */
-public class VisualiseGameMain extends JFrame implements Runnable, ActionListener {
-
+public class VisualiseGameMain extends JFrame implements Runnable, ActionListener{
     private JLabel labelBestScore;
     private Game2048Panel gamePanel;
     private JButton btnLearning;
@@ -35,6 +33,54 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
         setTitle(PLAYER_NAME);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(new Dimension(340, 475));
+        setFocusable(true);
+
+        /*this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                Game2048 game = gamePanel.getGame();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    game.resetGame();
+                }
+                if (!game.canMove()) {
+                    game.setMyLose(true);
+                }
+
+                if (!game.isMyWin() && !game.isMyLose()) {
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_LEFT:
+                            game.left();
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            game.right();
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            game.down();
+                            break;
+                        case KeyEvent.VK_UP:
+                            game.up();
+                            break;
+                    }
+                }
+
+                if (!game.isMyWin() && !game.canMove()) {
+                    game.setMyLose(true);
+                }
+
+                repaint();
+                System.out.println("owo");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });*/
         //setResizable(false);
 
         Container content = this.getContentPane();
@@ -45,6 +91,7 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
 
         this.btnLearning.addActionListener(this);
         this.initialiseLearning();
+
     }
 
     private void setupGamePanel(Container content) {
@@ -104,7 +151,6 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
 
         this.btnLearning.setText("Play game");
         this.learningUnderway = false;
-
     }
 
 
@@ -130,6 +176,8 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
 
     public static void main(String[] args) {
         VisualiseGameMain game = new VisualiseGameMain();
+        //game.pack();
         game.setVisible(true);
+      //  game.requestFocusInWindow();
     }
 }

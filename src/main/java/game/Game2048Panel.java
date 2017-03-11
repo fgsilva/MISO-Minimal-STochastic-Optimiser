@@ -16,6 +16,7 @@ package game;/*
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * @author Konstantin Bulenkov
@@ -29,48 +30,55 @@ public class Game2048Panel extends JPanel {
 
     private Game2048 game;
 
-
     public Game2048Panel() {
         game = new Game2048();
         setPreferredSize(new Dimension(340, 400));
         setFocusable(true);
-       /* addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    game.resetGame();
-                }
-                if (!game.canMove()) {
-                    game.setMyLose(true);
-                }
 
-                if (!game.isMyWin() && !game.isMyLose()) {
-                    switch (e.getKeyCode()) {
-                        case KeyEvent.VK_LEFT:
-                            game.left();
-                            break;
-                        case KeyEvent.VK_RIGHT:
-                            game.right();
-                            break;
-                        case KeyEvent.VK_DOWN:
-                            game.down();
-                            break;
-                        case KeyEvent.VK_UP:
-                            game.up();
-                            break;
-                    }
-                }
 
-                if (!game.isMyWin() && !game.canMove()) {
-                    game.setMyLose(true);
-                }
-
-                repaint();
-            }
-        });*/
         game.resetGame();
-        //  this.startPlayer();
+
+        registerKeyboardAction(panelAction, "UP", KeyStroke.getKeyStroke("UP"), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        registerKeyboardAction(panelAction, "DOWN", KeyStroke.getKeyStroke("DOWN"), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        registerKeyboardAction(panelAction, "LEFT", KeyStroke.getKeyStroke("LEFT"), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        registerKeyboardAction(panelAction, "RIGHT", KeyStroke.getKeyStroke("RIGHT"), JComponent.WHEN_IN_FOCUSED_WINDOW);
+
     }
+
+    private ActionListener panelAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(game.isMyLose())
+                return;
+
+            if (!game.canMove()) {
+                game.setMyLose(true);
+                return;
+            }
+            String command = (String) ae.getActionCommand();
+            switch (command){
+                case "UP":
+                    game.up();
+                    break;
+                case "DOWN":
+                    game.down();
+                    break;
+                case "LEFT":
+                    game.left();
+                    break;
+                case "RIGHT":
+                    game.right();
+                    break;
+                default:
+                    return;
+            }
+
+            if (!game.isMyWin() && !game.canMove()) {
+                game.setMyLose(true);
+            }
+            repaint();
+        }
+    };
 
 
     @Override
@@ -146,4 +154,6 @@ public class Game2048Panel extends JPanel {
     public Game2048 getGame() {
         return game;
     }
+
+
 }
