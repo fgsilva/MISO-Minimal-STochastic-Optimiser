@@ -3,7 +3,7 @@ package game;
 import java.awt.*;
 
 /**
- * Created by fernando on 3/6/17.
+ * A tile
  */
 public class Tile {
     private int value;

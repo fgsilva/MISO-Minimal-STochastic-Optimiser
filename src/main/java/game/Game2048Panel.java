@@ -1,4 +1,6 @@
-package game;/*
+package game;
+
+/*
  * Copyright 1998-2014 Konstantin Bulenkov http://bulenkov.com/about
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +18,8 @@ package game;/*
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author Konstantin Bulenkov
@@ -24,7 +27,7 @@ import java.awt.event.*;
  */
 public class Game2048Panel extends JPanel {
     private static final Color BG_COLOR = new Color(0xbbada0);
-    private static final String FONT_NAME = "Arial";
+    private static final String FONT_NAME = "Courier";
     private static final int TILE_SIZE = 64;
     private static final int TILES_MARGIN = 16;
 
@@ -35,20 +38,18 @@ public class Game2048Panel extends JPanel {
         setPreferredSize(new Dimension(340, 400));
         setFocusable(true);
 
-
         game.resetGame();
 
         registerKeyboardAction(panelAction, "UP", KeyStroke.getKeyStroke("UP"), JComponent.WHEN_IN_FOCUSED_WINDOW);
         registerKeyboardAction(panelAction, "DOWN", KeyStroke.getKeyStroke("DOWN"), JComponent.WHEN_IN_FOCUSED_WINDOW);
         registerKeyboardAction(panelAction, "LEFT", KeyStroke.getKeyStroke("LEFT"), JComponent.WHEN_IN_FOCUSED_WINDOW);
         registerKeyboardAction(panelAction, "RIGHT", KeyStroke.getKeyStroke("RIGHT"), JComponent.WHEN_IN_FOCUSED_WINDOW);
-
     }
 
     private ActionListener panelAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            if(game.isMyLose())
+            if (game.isMyLose())
                 return;
 
             if (!game.canMove()) {
@@ -56,7 +57,7 @@ public class Game2048Panel extends JPanel {
                 return;
             }
             String command = (String) ae.getActionCommand();
-            switch (command){
+            switch (command) {
                 case "UP":
                     game.up();
                     break;

@@ -6,7 +6,7 @@ import game.Game2048;
 import stochasticOptimiser.MoveSequence;
 
 /**
- * Created by fernando on 3/8/17.
+ * Single task. Evaluates a sequence of moves over a number of trials/simulations.
  */
 public class SingleTask {
 
@@ -15,7 +15,7 @@ public class SingleTask {
     private MoveSequence sequence;
     private DirectionMapper mapper;
 
-    private int trials = 100;
+    private int trials = 10;
 
     public SingleTask(MoveSequence sequence, Game2048 game) {
         this.sequence = sequence;
@@ -27,7 +27,7 @@ public class SingleTask {
         boolean mayLose = false;
 
         for (int t = 0; t < trials; t++) {
-             Game2048 game = new Game2048(g.getTiles().clone());
+            Game2048 game = new Game2048(g.getTiles().clone());
 
             byte[] b = sequence.getValues();
             for (int i = 0; i < b.length; i++) {

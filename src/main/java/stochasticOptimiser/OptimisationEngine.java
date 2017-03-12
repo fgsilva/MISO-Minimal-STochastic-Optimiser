@@ -2,8 +2,8 @@ package stochasticOptimiser;
 
 import game.Direction;
 import game.DirectionMapper;
-import game.Tile;
 import game.Game2048;
+import game.Tile;
 import taskexecutor.ParallelTaskExecutor;
 import taskexecutor.SimpleScoreResult;
 import taskexecutor.SingleTask;
@@ -12,7 +12,7 @@ import taskexecutor.TaskExecutor;
 import java.util.Random;
 
 /**
- * Created by fernando on 3/8/17.
+ * Optimisation engine
  */
 public class OptimisationEngine {
 
@@ -79,5 +79,9 @@ public class OptimisationEngine {
         for (int i = 0; i < this.gameConfiguration.length; i++) {
             gameConfiguration[i] = new Tile(configuration[i].getValue());
         }
+    }
+
+    public MoveSequencePopulation getPopulation() {
+        return this.population;
     }
 }

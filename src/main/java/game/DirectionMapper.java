@@ -1,7 +1,7 @@
 package game;
 
 /**
- * Created by fernando on 09-03-2017.
+ * Direction mapper. Maps a byte (0, 1, 2, 3) to a Direction.
  */
 public class DirectionMapper {
 

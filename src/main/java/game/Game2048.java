@@ -1,24 +1,18 @@
 package game;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
-
 /**
- * Created by fernando on 09-03-2017.
+ * One instance of the 2048 game. The board is composed of an array of tiles.
  */
 public class Game2048 {
 
     private Tile[] myTiles;
-    boolean myWin = false;
-    boolean myLose = false;
-    int myScore = 0;
-
-
+    private boolean myWin = false;
+    private boolean myLose = false;
+    private int myScore = 0;
 
 
     //start a game from a given configuration
@@ -32,9 +26,11 @@ public class Game2048 {
         myLose = false;
     }
 
-    //start a game from scratch
-    public Game2048() {}
+    //create an empty board.
+    public Game2048() {
+    }
 
+    //make a move in a given direction
     public void play(Direction direction) {
         if (!canMove()) {
             setMyLose(true);
@@ -63,6 +59,7 @@ public class Game2048 {
     }
 
 
+    //reset the board/game
     public void resetGame() {
         myScore = 0;
         myWin = false;
@@ -75,6 +72,7 @@ public class Game2048 {
         addTile();
     }
 
+    //move left
     public void left() {
         boolean needAddTile = false;
         for (int i = 0; i < 4; i++) {
@@ -95,18 +93,21 @@ public class Game2048 {
         System.arraycopy(re, 0, getTiles(), index * 4, 4);
     }
 
+    //move right.
     public void right() {
         myTiles = rotate(180);
         left();
         myTiles = rotate(180);
     }
 
+    //move up
     public void up() {
         myTiles = rotate(270);
         left();
         myTiles = rotate(90);
     }
 
+    //move down
     public void down() {
         myTiles = rotate(90);
         left();
@@ -218,10 +219,6 @@ public class Game2048 {
             if (i < 3 && oldLine[i].getValue() == oldLine[i + 1].getValue()) {
                 num *= 2;
                 myScore += num;
-                /*int ourTarget = 2048;
-                if (num == ourTarget) {
-                    myWin = true;
-                }*/
                 i++;
             }
             list.add(new Tile(num));
@@ -248,18 +245,22 @@ public class Game2048 {
         return result;
     }
 
+    //get the tiles
     public Tile[] getTiles() {
         return myTiles;
     }
 
+    //has the player won
     public boolean isMyWin() {
         return myWin;
     }
 
+    //player lost?
     public boolean isMyLose() {
         return myLose;
     }
 
+    //current game score
     public int getMyScore() {
         return myScore;
     }
@@ -268,6 +269,7 @@ public class Game2048 {
         this.myLose = myLose;
     }
 
+    //game ended
     public boolean isEnded() {
         return !canMove();
     }

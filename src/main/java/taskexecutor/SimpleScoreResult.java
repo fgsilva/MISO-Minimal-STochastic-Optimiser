@@ -1,6 +1,8 @@
 package taskexecutor;
 
-
+/**
+ * Task result - simple score result
+ */
 public class SimpleScoreResult {
     private int sequenceId;
     private double score = 0;

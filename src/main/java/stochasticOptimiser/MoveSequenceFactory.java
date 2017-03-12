@@ -3,7 +3,7 @@ package stochasticOptimiser;
 import java.util.Random;
 
 /**
- * Created by fernando on 3/8/17.
+ * Move sequence factory
  */
 public class MoveSequenceFactory {
 

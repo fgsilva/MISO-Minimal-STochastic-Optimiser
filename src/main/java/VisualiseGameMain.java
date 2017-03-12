@@ -1,18 +1,20 @@
-package game;
-
+import game.Direction;
+import game.Game2048;
+import game.Game2048Panel;
 import org.encog.util.Format;
 import stochasticOptimiser.MoveSequenceFactory;
 import stochasticOptimiser.OptimisationEngine;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 /**
- * Created by fernando on 09-03-2017.
+ * GUI and MAIN.
  */
-public class VisualiseGameMain extends JFrame implements Runnable, ActionListener{
+public class VisualiseGameMain extends JFrame implements Runnable, ActionListener {
     private JLabel labelBestScore;
     private Game2048Panel gamePanel;
     private JButton btnLearning;
@@ -23,7 +25,7 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
     private static final String PLAYER_NAME = "MISO - MInimal Stochastic Optimiser";
     private OptimisationEngine engine = null;
     private int bestScoreSoFar = 0;
-    private final int NUMBER_OF_SEQUENCES = 1000, SEQUENCE_LENGTH = 5;
+    private final int NUMBER_OF_SEQUENCES = 1000, SEQUENCE_LENGTH = 50;
 
     private final byte MAX_VALUE = 3;
     private Random random = new Random(1234);
@@ -138,8 +140,58 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
             this.engine.setConfiguration(game.getTiles());
             this.engine.executeLearning();
 
+            //v1
             Direction[] moves = this.engine.getCurrentBestSequence();
             gamePanel.playAll(new Direction[]{moves[0]});
+
+            //v2
+            /*double upAcum = 0, downAcum = 0, leftAcum = 0, rightAcum = 0;
+            int upCount = 0, downCount = 0, leftCount = 0, rightCount = 0;
+            MoveSequencePopulation pop = this.engine.getPopulation();
+            MoveSequence[] seqs = pop.getSequences();
+            DirectionMapper mapper = new DirectionMapper();
+
+            for(MoveSequence seq : seqs){
+                byte [] values = seq.getValues();
+                Direction first = mapper.map(values[0]);
+                switch(first){
+                    case UP:
+                        upAcum += seq.getScore();
+                        upCount++;
+                        break;
+
+                    case DOWN:
+                        downAcum += seq.getScore();
+                        downCount++;
+                        break;
+
+                    case LEFT:
+                        leftAcum += seq.getScore();
+                        leftCount++;
+                        break;
+
+                    case RIGHT:
+                        rightAcum += seq.getScore();
+                        rightCount++;
+                        break;
+                }
+            }
+            rightAcum /= rightCount;
+            leftAcum /= leftCount;
+            downAcum /= downCount;
+            upAcum /= upCount;
+
+            Direction next = null;
+            if(rightAcum >= leftAcum && rightAcum >= downAcum && rightAcum >= upAcum)
+                next = Direction.RIGHT;
+            else if(leftAcum >= rightAcum && leftAcum >= downAcum && leftAcum >= upAcum)
+                next = Direction.LEFT;
+            else if(downAcum >= rightAcum && downAcum >= leftAcum && downAcum >= upAcum)
+                next = Direction.DOWN;
+            else
+                next = Direction.UP;
+
+            gamePanel.playAll(new Direction[]{next});*/
 
             //update best score ever
             int score = game.getMyScore();
@@ -178,6 +230,6 @@ public class VisualiseGameMain extends JFrame implements Runnable, ActionListene
         VisualiseGameMain game = new VisualiseGameMain();
         //game.pack();
         game.setVisible(true);
-      //  game.requestFocusInWindow();
+        //  game.requestFocusInWindow();
     }
 }

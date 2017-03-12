@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/evolving-2048.iml" filepath="$PROJECT_DIR$/evolving-2048.iml" />
+      <module fileurl="file://$PROJECT_DIR$/miso-2048.iml" filepath="$PROJECT_DIR$/miso-2048.iml" />
     </modules>
   </component>
 </project>

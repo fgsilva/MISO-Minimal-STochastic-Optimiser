@@ -1,5 +1,8 @@
 package game;
 
+/**
+ * Move direction
+ */
 public enum Direction {
     /**
      * Move Up

@@ -1,7 +1,7 @@
 package stochasticOptimiser;
 
 /**
- * Created by fernando on 08-03-2017.
+ * Move sequence population
  */
 public class MoveSequencePopulation {
 
@@ -62,4 +62,7 @@ public class MoveSequencePopulation {
         return bestSequence;
     }
 
+    public MoveSequence[] getSequences() {
+        return this.population;
+    }
 }

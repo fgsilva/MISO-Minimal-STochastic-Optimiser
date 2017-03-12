@@ -1,6 +1,8 @@
 package taskexecutor;
 
-
+/**
+ * Abstract task executor.
+ */
 public abstract class TaskExecutor extends Thread {
 
 

@@ -1,7 +1,8 @@
 package stochasticOptimiser;
 
 /**
- * Created by fernando on 08-03-2017.
+ * A sequence of moves -- each move is represented as a byte (0, 1, 2, 3),
+ * and is assigned a score
  */
 public class MoveSequence implements Cloneable {
 
